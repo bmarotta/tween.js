@@ -16,6 +16,10 @@ export default class Group {
 		[key: string]: Tween<UnknownProps>
 	} = {}
 
+	getCount(): number {
+		return Object.keys(this._tweens).length;
+	}
+
 	getAll(): Array<Tween<UnknownProps>> {
 		return Object.keys(this._tweens).map(tweenId => {
 			return this._tweens[tweenId]

@@ -110,7 +110,7 @@ declare class Tween<T extends UnknownProps> {
     isPlaying(): boolean;
     isPaused(): boolean;
     to(properties: UnknownProps, duration?: number): this;
-    duration(d: number): this;
+    duration(d?: number): this;
     start(time?: number): this;
     private _setupProperties;
     stop(): this;
@@ -118,19 +118,19 @@ declare class Tween<T extends UnknownProps> {
     pause(time?: number): this;
     resume(time?: number): this;
     stopChainedTweens(): this;
-    group(group: Group): this;
-    delay(amount: number): this;
-    repeat(times: number): this;
-    repeatDelay(amount: number): this;
-    yoyo(yoyo: boolean): this;
-    easing(easingFunction: EasingFunction): this;
-    interpolation(interpolationFunction: InterpolationFunction): this;
-    chain(...tweens: Array<Tween<UnknownProps>>): this;
-    onStart(callback: (object: T) => void): this;
-    onUpdate(callback: (object: T, elapsed: number) => void): this;
-    onRepeat(callback: (object: T) => void): this;
-    onComplete(callback: (object: T) => void): this;
-    onStop(callback: (object: T) => void): this;
+    group(group?: Group): this;
+    delay(amount?: number): this;
+    repeat(times?: number): this;
+    repeatDelay(amount?: number): this;
+    yoyo(yoyo?: boolean): this;
+    easing(easingFunction?: EasingFunction): this;
+    interpolation(interpolationFunction?: InterpolationFunction): this;
+    chain(...tweens: Array<Tween<any>>): this;
+    onStart(callback?: (object: T) => void): this;
+    onUpdate(callback?: (object: T, elapsed: number) => void): this;
+    onRepeat(callback?: (object: T) => void): this;
+    onComplete(callback?: (object: T) => void): this;
+    onStop(callback?: (object: T) => void): this;
     private _goToEnd;
     /**
      * @returns true if the tween is still playing after the update, false
@@ -153,6 +153,7 @@ declare type UnknownProps = Record<string, any>;
 declare class Group {
     private _tweens;
     private _tweensAddedDuringUpdate;
+    getCount(): number;
     getAll(): Array<Tween<UnknownProps>>;
     removeAll(): void;
     add(tween: Tween<UnknownProps>): void;
@@ -170,10 +171,11 @@ declare class Sequence {
     static nextId(): number;
 }
 
-declare const VERSION = "18.6.4";
+declare const VERSION = "18.6.5";
 
 declare const nextId: typeof Sequence.nextId;
 declare const getAll: () => Tween<Record<string, any>>[];
+declare const getCount: () => number;
 declare const removeAll: () => void;
 declare const add: (tween: Tween<Record<string, any>>) => void;
 declare const remove: (tween: Tween<Record<string, any>>) => void;
@@ -252,6 +254,7 @@ declare const exports: {
     Tween: typeof Tween;
     VERSION: string;
     getAll: () => Tween<Record<string, any>>[];
+    getCount: () => number;
     removeAll: () => void;
     add: (tween: Tween<Record<string, any>>) => void;
     remove: (tween: Tween<Record<string, any>>) => void;
@@ -259,4 +262,4 @@ declare const exports: {
 };
 
 export default exports;
-export { Easing, Group, Interpolation, Sequence, Tween, VERSION, add, getAll, nextId, now, remove, removeAll, update };
+export { Easing, Group, Interpolation, Sequence, Tween, VERSION, add, getAll, getCount, nextId, now, remove, removeAll, update };

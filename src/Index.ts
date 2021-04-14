@@ -31,6 +31,7 @@ const TWEEN = mainGroup
 // existing API.
 // https://github.com/rollup/rollup/issues/1961#issuecomment-423037881
 const getAll = TWEEN.getAll.bind(TWEEN)
+const getCount = TWEEN.getCount.bind(TWEEN)
 const removeAll = TWEEN.removeAll.bind(TWEEN)
 const add = TWEEN.add.bind(TWEEN)
 const remove = TWEEN.remove.bind(TWEEN)
@@ -38,7 +39,7 @@ const update = TWEEN.update.bind(TWEEN)
 
 // NOTE! Make sure both lists of exports below are kept in sync:
 
-export {Easing, Group, Interpolation, now, Sequence, nextId, Tween, VERSION, getAll, removeAll, add, remove, update}
+export {Easing, Group, Interpolation, now, Sequence, nextId, Tween, VERSION, getAll, getCount, removeAll, add, remove, update}
 
 const exports = {
 	Easing,
@@ -50,6 +51,7 @@ const exports = {
 	Tween,
 	VERSION,
 	getAll,
+	getCount,
 	removeAll,
 	add,
 	remove,

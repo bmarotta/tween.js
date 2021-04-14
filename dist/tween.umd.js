@@ -234,6 +234,9 @@
             this._tweens = {};
             this._tweensAddedDuringUpdate = {};
         }
+        Group.prototype.getCount = function () {
+            return Object.keys(this._tweens).length;
+        };
         Group.prototype.getAll = function () {
             var _this = this;
             return Object.keys(this._tweens).map(function (tweenId) {
@@ -402,6 +405,7 @@
             this._startTime = 0;
             this._easingFunction = Easing.Linear.None;
             this._interpolationFunction = Interpolation.Linear;
+            // eslint-disable-next-line
             this._chainedTweens = [];
             this._onStartCallbackFired = false;
             this._id = Sequence.nextId();
@@ -429,6 +433,7 @@
             return this;
         };
         Tween.prototype.duration = function (d) {
+            if (d === void 0) { d = 1000; }
             this._duration = d;
             return this;
         };
@@ -566,14 +571,17 @@
             return this;
         };
         Tween.prototype.group = function (group) {
+            if (group === void 0) { group = mainGroup; }
             this._group = group;
             return this;
         };
         Tween.prototype.delay = function (amount) {
+            if (amount === void 0) { amount = 0; }
             this._delayTime = amount;
             return this;
         };
         Tween.prototype.repeat = function (times) {
+            if (times === void 0) { times = 0; }
             this._initialRepeat = times;
             this._repeat = times;
             return this;
@@ -583,17 +591,21 @@
             return this;
         };
         Tween.prototype.yoyo = function (yoyo) {
+            if (yoyo === void 0) { yoyo = false; }
             this._yoyo = yoyo;
             return this;
         };
         Tween.prototype.easing = function (easingFunction) {
+            if (easingFunction === void 0) { easingFunction = Easing.Linear.None; }
             this._easingFunction = easingFunction;
             return this;
         };
         Tween.prototype.interpolation = function (interpolationFunction) {
+            if (interpolationFunction === void 0) { interpolationFunction = Interpolation.Linear; }
             this._interpolationFunction = interpolationFunction;
             return this;
         };
+        // eslint-disable-next-line
         Tween.prototype.chain = function () {
             var tweens = [];
             for (var _i = 0; _i < arguments.length; _i++) {
@@ -762,7 +774,7 @@
         return Tween;
     }());
 
-    var VERSION = '18.6.4';
+    var VERSION = '18.6.5';
 
     /**
      * Tween.js - Licensed under the MIT license
@@ -785,6 +797,7 @@
     // existing API.
     // https://github.com/rollup/rollup/issues/1961#issuecomment-423037881
     var getAll = TWEEN.getAll.bind(TWEEN);
+    var getCount = TWEEN.getCount.bind(TWEEN);
     var removeAll = TWEEN.removeAll.bind(TWEEN);
     var add = TWEEN.add.bind(TWEEN);
     var remove = TWEEN.remove.bind(TWEEN);
@@ -799,6 +812,7 @@
         Tween: Tween,
         VERSION: VERSION,
         getAll: getAll,
+        getCount: getCount,
         removeAll: removeAll,
         add: add,
         remove: remove,
@@ -814,6 +828,7 @@
     exports.add = add;
     exports.default = exports$1;
     exports.getAll = getAll;
+    exports.getCount = getCount;
     exports.nextId = nextId;
     exports.now = now$1;
     exports.remove = remove;
